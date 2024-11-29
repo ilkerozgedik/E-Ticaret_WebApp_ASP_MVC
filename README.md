@@ -30,4 +30,4 @@ Uygulama temel olarak aşağıdaki bölümleri içerir:
 
 ### Ekran Görüntüsü
 
-![Ekran Görüntüsü](https://ibb.co/FB2rFx5)
+![Ekran Görüntüsü](https://i.ibb.co/Q6Lg4bP/msedge-Bdto7-D8-Ym-X.png)
