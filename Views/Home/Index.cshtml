@@ -1,0 +1,48 @@
+﻿@using System.Globalization
+@model List<RegisterLoginApp_ASP_MVC.Models.Product>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Sayfa - E-Ticaret</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">E-Ticaret Ürünler</h1>
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text">@product.Description</p>
+                            <p class="card-text"><strong>@product.Price.ToString("C", new CultureInfo("tr-TR"))</strong></p>
+                            <!-- Sepete Ekle butonu - JavaScript ile bağlanacak -->
+                            <button class="btn btn-primary add-to-cart" data-productid="@product.Id">Sepete Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Sepete Ekle butonuna tıklanırsa
+        $(".add-to-cart").click(function () {
+            var productId = $(this).data("productid"); // Butonun data-productid özelliğinden ürün ID'sini alıyoruz
+
+            // Sepete eklemek için CartController'a yönlendirme yapıyoruz
+            window.location.href = "/Cart/AddToCart?productId=" + productId;
+        });
+    </script>
+</body>
+</html>

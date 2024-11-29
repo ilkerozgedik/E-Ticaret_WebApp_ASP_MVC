@@ -1,0 +1,50 @@
+﻿@using System.Globalization
+@using RegisterLoginApp_ASP_MVC.Models
+@model List<ProductInCart>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepetim</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Sepetim</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Ürün Adı</th>
+                    <th scope="col">Fiyat</th>
+                    <th scope="col">Miktar</th>
+                    <th scope="col">Toplam</th>
+                    <th scope="col">İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Price.ToString("C", new CultureInfo("tr-TR"))</td>
+                        <td>@item.Quantity</td>
+                        <td>@(item.Price * item.Quantity).ToString("C", new CultureInfo("tr-TR"))</td>
+                        <td>
+                            <a href="@Url.Action("RemoveFromCart", "Cart", new { productId = item.Id })" class="btn btn-danger">Sil</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-right">
+            <h4>Toplam: @Model.Sum(item => item.Price * item.Quantity).ToString("C", new CultureInfo("tr-TR"))</h4>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
